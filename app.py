@@ -1,5 +1,6 @@
 import streamlit as st
 from model import train_model
+import numpy as np
 
 st.title("🎓 Student Score Prediction (Lasso Regression)")
 
@@ -23,7 +24,8 @@ previous = st.slider("Previous Score", 0, 100)
 internet = st.slider("Internet Usage", 0, 12)
 
 if st.button("Predict"):
-    data = scaler.transform([[hours, attendance, sleep, previous, internet]])
-    prediction = model.predict(data)
+    input_data = np.array([[hours, attendance, sleep, previous, internet]])
+    input_scaled = scaler.transform(input_data)
+    prediction = model.predict(input_scaled)
 
     st.success(f"Predicted Score: {prediction[0]:.2f}")
