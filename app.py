@@ -16,16 +16,16 @@ st.dataframe(coef)
 
 st.subheader("🔮 Predict Final Score")
 
-# Inputs
+# User Inputs
 hours = st.slider("Hours Studied", 0, 12)
-attendance = st.slider("Attendance", 0, 100)
+attendance = st.slider("Attendance (%)", 0, 100)
 sleep = st.slider("Sleep Hours", 0, 12)
 previous = st.slider("Previous Score", 0, 100)
-internet = st.slider("Internet Usage", 0, 12)
+internet = st.slider("Internet Usage (hrs)", 0, 12)
 
 if st.button("Predict"):
     input_data = np.array([[hours, attendance, sleep, previous, internet]])
     input_scaled = scaler.transform(input_data)
     prediction = model.predict(input_scaled)
 
-    st.success(f"Predicted Score: {prediction[0]:.2f}")
+    st.success(f"Predicted Final Score: {prediction[0]:.2f}")
