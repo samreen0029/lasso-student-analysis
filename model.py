@@ -8,6 +8,10 @@ def train_model():
     # Load dataset
     df = pd.read_csv("student_data.csv")
 
+    # Fix column issues
+    df.columns = df.columns.str.strip()
+    df = df.dropna()
+
     # Features and target
     X = df[['Hours_Studied', 'Attendance', 'Sleep_Hours',
             'Previous_Scores', 'Internet_Usage']]
